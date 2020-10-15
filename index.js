@@ -1,76 +1,84 @@
-var robot = document.querySelector(".robot");
-var eyeBallLeft = document.querySelector(".eye-ball-left");
-var eyeBallRight = document.querySelector(".eye-ball-right");
+/* 
 
+Handwriting animation. # = delay , | = clear 
 
+*/
 
-/* Handwriting animation */
-delayedText("Hei#i#i#i#i#!##### Eg heite Geir. ####### Eg kan hjelpe deg med finne jobb!. ######### | Finne jobb kan vera vanskeleg med eigenhand,##### og eg trur ##vi skal ha det mykje kjekt # ilag!#!######## | OI! ##### .###.#..## Hoyra du det ?#####, eg trur NAV KJEM. ####Dei skal sjekke om du vore ferie..############# |Nei men la oss sjekke stillingane. Her e dei!:",
-    document.querySelector(".robot-chat-bubble")
+delayedText(
+  "Hei#i#i#i#i#!##### Eg heite Geir. ####### Eg kan hjelpe deg med finne jobb!. ######### | Finne jobb kan vera vanskeleg med eigenhand,##### og eg trur ##vi skal ha det mykje kjekt # ilag!#!######## | OI! ##### .###.#..## Hoyra du det ?#####, eg trur NAV KJEM. ####Dei skal sjekke om du vore ferie..############# |Nei men la oss sjekke stillingane. Her e dei!:",
+  document.querySelector(".robot-chat-bubble")
 );
 
 function delayedText(text, domElement, config) {
   const baseDelay = 50; // Milliseconds
   const delayCharDelay = 0;
-  const pauseChar = "#"
-  const clearChar = "|"
+  const pauseChar = "#";
+  const clearChar = "|";
   let timeoutObjects = [];
   let totalDelay = 0;
 
-  text.split('').forEach((char,index) => {
+  text.split("").forEach((char, index) => {
+    let delay = baseDelay + (char === pauseChar ? delayCharDelay : 0);
+    totalDelay += delay;
 
-    let delay =  baseDelay + (char === pauseChar ? delayCharDelay : 0);
-    totalDelay+= delay;
-
-  
-
-    timeoutObjects.push(window.setTimeout(() => {
-
+    timeoutObjects.push(
+      window.setTimeout(() => {
         if (char == clearChar) {
           domElement.textContent = "";
-        }
-        else if (char != pauseChar) {
+        } else if (char != pauseChar) {
           domElement.textContent += char;
         }
-
-     
-        
-
-
-    }, delay + totalDelay))
-
-  })
-
-  
-
-  
+      }, delay + totalDelay)
+    );
+  });
 }
 
 
-/*
-delayedText(
-  "he#h#heh nei trokJ##E ##D#######U## klar#A#A#a fe j#o#bb#e ej. Er#lend# du # errrrr###land ####perlerr. DOM DOM DOM #### |DO#OO#M ##### D #### O ###M###################. Men gi aldri opp! ############################# Bare heile tida ###",
-  document.querySelector(".robot-chat-bubble")
-);
+
+
+
+
+
+
+
+
+/* 
+
+Some delayed animations that goes with the text
 
 */
 
-
-window.setTimeout(()=>{
-
-  console.log("something")
-  const ads = document.querySelector("body > main > div.ads > div")
+window.setTimeout(() => {
+  console.log("something");
+  const ads = document.querySelector("body > main > div.ads > div");
   ads.classList.add("fade-in");
   ads.style.display = "flex";
-},18000)
+}, 18000);
 
-
-window.setTimeout(()=>{
+window.setTimeout(() => {
   const body = document.querySelector("body");
-  body.classList.add("quadrat")
-},10000)
+  body.classList.add("quadrat");
+}, 10000);
 
-/* Move robot eyes when mouse moves */
+
+
+
+
+
+
+
+
+
+
+/* 
+
+Move robot eyes when mouse moves 
+
+*/
+
+var robot = document.querySelector(".robot");
+var eyeBallLeft = document.querySelector(".eye-ball-left");
+var eyeBallRight = document.querySelector(".eye-ball-right");
 
 document.addEventListener("mousemove", (e) => {
   updateEyeBallPos(eyeBallLeft);
@@ -94,7 +102,55 @@ document.addEventListener("mousemove", (e) => {
   }
 });
 
-/* Get some data from Finn.no, and render it on the page */
+
+
+
+
+
+
+/* 
+
+Get some data from Finn.no, and render it on the page 
+
+*/
+
+const getJobData = async () => {
+  const response = await fetch("https://www.finn.no/job/fulltime/search.html?location=1.20001.22046&location=2.20001.22046.20220&q=front+end");
+  const HTML_Data = await response.text();
+
+  const DOM_Object = new DOMParser().parseFromString(HTML_Data, "text/html");
+
+  // Use query selectors to find the specific places we want to take data from
+  const ads = DOM_Object.querySelector("#page-results");
+  const ledige_stillinger = DOM_Object.querySelectorAll(".panel .u-strong")[0].textContent;
+  const nye_idag = DOM_Object.querySelector("#__next > main > div.grid > section > ul:nth-child(2) > li > div > label > span").textContent;
+
+  // Page elements were we wanna render the data
+  const document_annonser = document.querySelector(".ads");
+  const document_stillinger = document.querySelector(".stillinger");
+  const document_nye_idag = document.querySelector(".nye-idag");
+
+  // Render the data in said places
+  document_annonser.innerHTML = ads.innerHTML;
+  document_stillinger.classList.add("fade-in");
+  document_stillinger.style.display = "inline-block";
+  document_stillinger.textContent ="Front-end stillinger @ Vestland: " + ledige_stillinger;
+
+  document_nye_idag.classList.add("fade-in");
+  document_nye_idag.style.display = "inline-block";
+  document_nye_idag.textContent = "Nye idag: " + nye_idag;
+};
+
+getJobData();
+
+
+
+/* 
+
+  Alternative way to do async using Promises instead of Async function 
+  
+*/
+
 /*
 fetch(
   "https://www.finn.no/job/fulltime/search.html?location=1.20001.22046&location=2.20001.22046.20220&q=front+end"
@@ -121,37 +177,3 @@ fetch(
     console.warn("Something went wrong.", err);
   });
 */
-
-  const getJobData = async () => {
-
-    const response = await fetch("https://www.finn.no/job/fulltime/search.html?location=1.20001.22046&location=2.20001.22046.20220&q=front+end")
-    const HTML_Data = await response.text()
-
-    const DOM_Object = new DOMParser().parseFromString(HTML_Data, "text/html")
-
-    
-    // Use query selectors to find the specific places we want to take data from
-    const ads = DOM_Object.querySelector("#page-results");
-    const ledige_stillinger = DOM_Object.querySelectorAll(".panel .u-strong")[0].textContent;
-    const nye_idag = DOM_Object.querySelector("#__next > main > div.grid > section > ul:nth-child(2) > li > div > label > span").textContent;
-
-    // Page elements were we wanna render the data
-    const document_annonser = document.querySelector(".ads");
-    const document_stillinger = document.querySelector(".stillinger");
-    const document_nye_idag = document.querySelector(".nye-idag");
-
-    // Render the data in said places
-    document_annonser.innerHTML = ads.innerHTML;
-    document_stillinger.classList.add("fade-in")
-    document_stillinger.style.display = "inline-block";
-    document_stillinger.textContent = "Front-end stillinger @ Vestland: " + ledige_stillinger;
-
-
-    document_nye_idag.classList.add("fade-in")
-    document_nye_idag.style.display = "inline-block";
-    document_nye_idag.textContent = "Nye idag: " + nye_idag ;
-
-
-  }
-
-  getJobData();
