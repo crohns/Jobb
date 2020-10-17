@@ -9,25 +9,37 @@
     <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap" rel="stylesheet">
   </head>
   <body>
-    <main>
-      <div class = "robot-chat-bubble"> </div>
-      <div class="robot bounce-6">
-        <div class="antenna"></div>
-        <div class="head">
-          <div class="mask">
-            <div class="eye"><div class="eye-ball-left"></div></div>
-            <div class="eye"><div class="eye-ball-right"></div></div>
-          </div>
-          <div class="mouth"></div>
+
+
+    <!-- Robot -->
+    
+    <div class="robot animation-infinite-bouncing">
+      <div class="antenna"></div>
+      <div class="head">
+        <div class="mask">
+          <div class="eye"><div class="eye-ball-left"></div></div>
+          <div class="eye"><div class="eye-ball-right"></div></div>
         </div>
-        <div class="torso erlend-bg"></div>
+        <div class="mouth"></div>
       </div>
-      <div id = "head">
-        <div class="stillinger"></div>
-        <div class="nye-idag">Nye idag 0</div>
+      <div class="torso erlend-bg"></div>
+    </div>
+
+
+
+    <!-- Content -->
+    <main>
+
+      <div class = "robot-chat-bubble"> </div>
+     
+      <div class = "job-info-panel">
+
+        <div class="available-jobs-info-box"></div>
+        <div class="new-jobs-today-info-box"></div>
+
       </div>
-      <div class="ads"></div>
-      <div class="gaa-til-finn"></div>
+
+      <section class="job-search-results-container"></section>
       
     </main>
 

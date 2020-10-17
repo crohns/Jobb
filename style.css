@@ -1,3 +1,9 @@
+/*
+
+  Base structure and styling
+
+*/
+
 body {
   
   background: linear-gradient(
@@ -12,15 +18,61 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.robot {
-  position: fixed;
-  animation-duration: 2s;
-  animation-iteration-count: infinite;
-  margin-left: -150px;
-  margin-top: -150px;
+
+main {
+  margin: 505px auto;
+  width: 60%;
+  position: relative;
+  font-size: 15px;
 }
 
-.lgbt {
+
+.robot-chat-bubble {
+
+  font-family: 'Amatic SC', cursive;
+  font-size: 60px;
+  color: rgb(218, 204, 224);
+  height: 200px;
+
+}
+
+.available-jobs-info-box, .new-jobs-today-info-box {
+  padding: 25px;
+  font-size: 15px;
+  font-weight: bold;
+  display: none;
+  border-color: rgb(247, 165, 229);
+  border-radius: 25px;
+  border: 1px;
+  margin-right: 10px;
+  border-style: solid;
+  color: rgb(247, 165, 229);
+  font-family: "Open Sans Condensed", sans-serif;
+  letter-spacing: 1pt;
+}
+
+.available-jobs-info-box {
+
+  color:white;
+  border-color: white;
+ 
+}
+
+.job-search-results-container {
+  display: none;
+  margin-top: 5px;
+}
+
+
+
+/* 
+
+  Colors and gradients 
+
+*/
+
+
+.rainbow {
 	background: linear-gradient(180deg, #FE0000 16.66%,
 		#FD8C00 16.66%, 33.32%,
 		#FFE500 33.32%, 49.98%,
@@ -38,48 +90,25 @@ body {
 		rgb(219, 152, 152) 83.3%);
 }
 
-article {
-  margin-right: 25px;
-  margin-top: 25px;
-  padding: 25px;
-  border-radius: 25px;
-  width: 350px;
-  color: rgb(229, 220, 230);
-  border-top: solid 1px;
-  border-color: rgb(216, 108, 216);
-  font-family: "Nunito Sans", sans-serif;
-  font-weight: bold;
+
+
+
+/*
+
+   CSS Animations 
+
+*/
+
+
+.animation-flashing-background {
+
+  -webkit-animation: BACKGROUND-CHAOS 1s ;  /* Safari 4+ */
+  -moz-animation: BACKGROUND-CHAOS 1s ;  /* Fx 5+ */
+  -o-animation: BACKGROUND-CHAOS 1s;  /* Opera 12+ */
+  animation: BACKGROUND-CHAOS 1s;  /* IE 10+, Fx 29+ */
 }
 
-.robot-chat-bubble {
-
-
- 
-  font-family: 'Amatic SC', cursive;
-  font-size: 60px;
-  color: rgb(218, 204, 224);
-  height: 200px;
-
-}
-
-.u-screen-reader-only {
-  display: hidden;
-}
-
-#head {
-  
-}
-
-
-.quadrat {
-
-  -webkit-animation: NAME-YOUR-ANIMATION 1s ;  /* Safari 4+ */
-  -moz-animation: NAME-YOUR-ANIMATION 1s ;  /* Fx 5+ */
-  -o-animation: NAME-YOUR-ANIMATION 1s;  /* Opera 12+ */
-  animation: NAME-YOUR-ANIMATION 1s;  /* IE 10+, Fx 29+ */
-}
-
-@-webkit-keyframes NAME-YOUR-ANIMATION {
+@keyframes BACKGROUND-CHAOS {
   0%, 25% {
     background: rgb(158, 87, 140);
     
@@ -97,45 +126,69 @@ article {
     background: rgb(24, 46, 105);
   }
 }
-article a {
-  color: rgb(233, 145, 233);
-  text-decoration: none;
-  font-size: 16px;
+
+
+.animation-fade-in {
+  animation: fadeInAnimation ease 3s ;
+  animation-iteration-count: 1; 
+  animation-fill-mode: forwards; 
 }
 
-.nye-idag {
-  padding: 25px;
-  font-size: 15px;
-  font-weight: bold;
-  display: none;
-  border-color: rgb(247, 201, 237);
-  border-radius: 25px;
-  border: 1px;
-  border-style: solid;
-  color: rgb(247, 201, 237);
-  font-family: "Open Sans Condensed", sans-serif;
-  letter-spacing: 1pt;
+@keyframes fadeInAnimation { 
+  0% { 
+      opacity: 0; 
+  } 
+  100% { 
+      opacity: 1; 
+   } 
+} 
+
+
+.animation-infinite-bouncing {
+  animation-name: bounce-6;
+  animation-timing-function: ease;
+}
+@keyframes bounce-6 {
+  0% {
+    transform: scale(1, 1) translateY(0);
+  }
+  10% {
+    transform: scale(1.1, 0.9) translateY(0);
+  }
+  30% {
+    transform: scale(0.9, 1.1) translateY(-100px);
+  }
+  50% {
+    transform: scale(1.05, 0.95) translateY(0);
+  }
+  57% {
+    transform: scale(1, 1) translateY(-7px);
+  }
+  64% {
+    transform: scale(1, 1) translateY(0);
+  }
+  100% {
+    transform: scale(1, 1) translateY(0);
+  }
 }
 
-body > main > div.ads > div {
-  display: none;
-  flex-wrap: wrap;
-  margin-top: 5px;
+
+
+
+/* 
+
+  The robot
+
+*/
+
+.robot {
+  position: fixed;
+  left: 10%;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+
 }
 
-#page-results-heading {
-  display: none;
-}
-
-.ground {
-  background-color: rgb(23, 182, 121);
-  height: 100%;
-  margin-top: 175px;
-}
-article img {
-  width: 150px;
-  display: none;
-}
 .antenna {
   margin-left: 52.5px;
   width: 5px;
@@ -172,14 +225,7 @@ article img {
   border-radius: 8px;
 }
 
-.eye-ball:hover {
-  width: 12px;
-  height: 12px;
-  background-color: black;
-  border-radius: 6px;
-  margin: 2px;
-}
-.eye-ball-left {
+.eye-ball-left, .eye-ball-right {
   width: 8px;
   height: 8px;
   background-color: black;
@@ -188,84 +234,6 @@ article img {
   margin-top: 4px;
 }
 
-.bounce-6 {
-  animation-name: bounce-6;
-  animation-timing-function: ease;
-}
-@keyframes bounce-6 {
-  0% {
-    transform: scale(1, 1) translateY(0);
-  }
-  10% {
-    transform: scale(1.1, 0.9) translateY(0);
-  }
-  30% {
-    transform: scale(0.9, 1.1) translateY(-100px);
-  }
-  50% {
-    transform: scale(1.05, 0.95) translateY(0);
-  }
-  57% {
-    transform: scale(1, 1) translateY(-7px);
-  }
-  64% {
-    transform: scale(1, 1) translateY(0);
-  }
-  100% {
-    transform: scale(1, 1) translateY(0);
-  }
-}
-
-
-  
-@keyframes fadeInAnimation { 
-    0% { 
-        opacity: 0; 
-    } 
-    100% { 
-        opacity: 1; 
-     } 
-} 
-
-.eye-ball-right {
-  width: 8px;
-  height: 8px;
-  background-color: black;
-  border-radius: 4px;
-  margin-left: 4px;
-  margin-top: 4px;
-}
-
-main {
-  margin: 505px auto;
-  width: 60%;
-  position: relative;
-  font-size: 15px;
-}
-.fade-in {
-animation: fadeInAnimation ease 3s ;
-animation-iteration-count: 1; 
-animation-fill-mode: forwards; 
-}
-
-.stillinger {
-  margin-right: 20px;
-  font-weight: bold;
-  padding: 25px;
-  font-size: 15px;
-  display: none;
-  border-color: white;
-  border-radius: 25px;
-  border: 1px;
-  border-style: solid;
-  color: white;
-  font-family: "Open Sans Condensed", sans-serif;
-  letter-spacing: 1pt;
-}
-
-.stillinger:hover {
-  zoom: 1.5;
-}
 .torso {
   margin-top: 10px;
   background-color: white;
@@ -273,4 +241,54 @@ animation-fill-mode: forwards;
   height: 100px;
   border-radius: 25px 25px 50px 50px;
 }
+
+
+
+
+
+
+/* 
+
+  Styling Finn.no HTML instead of extracting the data for now 
+
+*/
+
+.u-screen-reader-only {
+  display: hidden;
+}
+
+article {
+  margin-right: 25px;
+  margin-top: 25px;
+  padding: 25px;
+  border-radius: 25px;
+  width: 350px;
+  color: rgb(229, 220, 230);
+  border-top: solid 1px;
+  border-color: rgb(216, 108, 216);
+  font-family: "Nunito Sans", sans-serif;
+  font-weight: bold;
+}
+
+article a {
+  color: rgb(233, 145, 233);
+  text-decoration: none;
+  font-size: 16px;
+}
+
+
+#page-results-heading {
+  display: none;
+}
+
+article img {
+  width: 150px;
+  display: none;
+}
+
+.ads {
+ display: flex;
+ flex-wrap: wrap;
+}
+
 
