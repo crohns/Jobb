@@ -1,3 +1,6 @@
+
+
+
 /*
 
   Application entry point, everything fires off once the document is loaded
@@ -79,6 +82,11 @@ function delayedText(text, domElement, config) {
 
   
 }
+
+
+
+
+
 
 
 /* 
